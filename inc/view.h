@@ -18,4 +18,6 @@ void startView();
 
 void endView();
 
+void clearField();
+
 #endif

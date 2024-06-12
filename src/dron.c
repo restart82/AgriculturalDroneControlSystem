@@ -1,8 +1,97 @@
 #include "../inc/dron.h"
 
-dron_t initDron()
+dron_t initDron(int x_0, int y_0)
 {
     dron_t dron;
-    // dron.number = 5;
+    
+    dron.x = ZERO_X + x_0;
+    dron.y = ZERO_Y + y_0;
+    dron.basketNumber = 5;
+    dron.basket = (basket_t*)calloc(BASKET_BUFFER, sizeof(basket_t));
+    for (int i = 0; i < dron.basketNumber; i++)
+    {
+        dron.basket[i].x = dron.x + i + 1;
+        dron.basket[i].y = dron.y;
+    }
+    dron.currentCommand = LEFT;
+
     return dron;
+}
+
+void moveDron(dron_t* dron)
+{
+    for (int  i = dron->basketNumber - 1; i > 0; i--)
+    {
+        dron->basket[i] = dron->basket[i - 1];
+    }
+    dron->basket[0].x = dron->x;
+    dron->basket[0].y = dron->y;
+    
+    switch (dron->currentCommand)
+    {
+    case UP:
+        dron->y = dron->y - 1;
+        if (dron->y < 0)
+        {
+            dron->y = FIELD_SIZE_Y - 1;
+        }
+        break;
+    case DOWN:
+        dron->y = dron->y + 1;
+        if (dron->y >= FIELD_SIZE_Y)
+        {
+            dron->y = 0;
+        }
+        break;
+    case LEFT:
+        dron->x = dron->x - 1;
+        if (dron->x < 0)
+        {
+            dron->x = FIELD_SIZE_X - 1;
+        }
+        break;
+    case RIGHT:
+        dron->x = dron->x + 1;
+        if (dron->x >= FIELD_SIZE_X)
+        {
+            dron->x = 0;
+        }
+        break;
+    }
+}
+
+
+void setCommand(int keyPressed, dron_t* dron)
+{
+    switch (keyPressed)
+    {
+    case 'w':
+    case 'W':
+        if (dron->currentCommand != DOWN)
+        {
+            dron->currentCommand = UP;
+        }
+        break;
+    case 'd':
+    case 'D':
+        if (dron->currentCommand != LEFT)
+        {
+            dron->currentCommand = RIGHT;
+        }
+        break;
+    case 's':
+    case 'S':
+        if (dron->currentCommand != UP)
+        {
+            dron->currentCommand = DOWN;
+        }
+        break;
+    case 'a':
+    case 'A':
+        if (dron->currentCommand != RIGHT)
+        {
+            dron->currentCommand = LEFT;
+        }
+        break;
+    }
 }
