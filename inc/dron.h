@@ -30,6 +30,8 @@ dron_t initDron(int x_0, int y_0);
 
 void moveDron(dron_t* dron);
 
+void moveBasket(dron_t* dron);
+
 void setCommand(int keyPressed, dron_t* dron);
 
 #endif

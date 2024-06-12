@@ -1,5 +1,22 @@
 #include "../inc/view.h"
 
+void info(dron_t* dron)
+{
+    static bool flag = false;
+    flag = !flag;
+    if (flag)
+    {
+        mvprintw(0, 0, "O");
+    }
+    else
+    {
+        mvprintw(0, 0, " ");
+    }
+
+    mvprintw(1, 0, "%d", dron->currentCommand);
+
+}
+
 void printDron(dron_t* dron)
 {
     attron(COLOR_PAIR(DRON_PAIR));

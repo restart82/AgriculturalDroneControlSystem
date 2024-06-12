@@ -14,6 +14,7 @@ int main(int argc, char const *argv[])
 
     while(!session.stop)
     {
+        info(&dron);
         keyPressed = getch();
         chekKey(keyPressed, &session);
 

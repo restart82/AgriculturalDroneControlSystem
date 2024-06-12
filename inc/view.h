@@ -20,4 +20,6 @@ void endView();
 
 void clearField();
 
+void info(dron_t* dron);
+
 #endif

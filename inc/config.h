@@ -14,6 +14,6 @@
 
 #define BACKGROUND_COLOR    COLOR_BLACK
 #define BORDER_COLOR        COLOR_MAGENTA
-#define DRON_COLOR          COLOR_GREEN
+#define DRON_COLOR          COLOR_BLUE
 
 
