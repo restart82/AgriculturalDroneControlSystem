@@ -3,6 +3,7 @@
 
 #include "config.h"
 #include "dron.h"
+#include "field.h"
 
 typedef enum
 {
@@ -13,6 +14,8 @@ typedef enum
 void printDron(dron_t* dron);
 
 void printBorder();
+
+void printPumpkins(field_t* field);
 
 void startView();
 

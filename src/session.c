@@ -5,7 +5,7 @@ session_t initSession()
     session_t session;
     session.pause = false;
     session.stop = false;
-    session.timeout = DEFOULT_TIMEOUT;
+    session._timeout = DEFOULT_TIMEOUT;
     return session;
 }
 

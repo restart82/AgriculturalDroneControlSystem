@@ -2,10 +2,12 @@
 #include "inc/dron.h"
 #include "inc/view.h"
 #include "inc/session.h"
+#include "inc/field.h"
 
 int main(int argc, char const *argv[])
 {
-    dron_t dron = initDron(25, 5);
+    dron_t dron = initDron(2, 2);
+    field_t field = initPumpkinField();
     session_t session = initSession();
     int keyPressed = 0;
 
@@ -14,7 +16,10 @@ int main(int argc, char const *argv[])
 
     while(!session.stop)
     {
+        #ifdef DEBUG_MOD
         info(&dron);
+        #endif
+
         keyPressed = getch();
         chekKey(keyPressed, &session);
 
@@ -23,10 +28,12 @@ int main(int argc, char const *argv[])
             setCommand(keyPressed, &dron);
             moveDron(&dron);
         }
+        updatePumpkinField(&field);
         clearField();
+        printPumpkins(&field);
         printDron(&dron);
         refresh();
-        timeout(session.timeout);
+        timeout(session._timeout);
     }
 
     endView();

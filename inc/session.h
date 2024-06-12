@@ -7,12 +7,11 @@ typedef struct
 {
     bool pause;
     bool stop;
-    int timeout;
+    int _timeout;
 }session_t;
 
 session_t initSession();
 
 void chekKey(int key, session_t* session);
-
 
 #endif

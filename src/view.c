@@ -52,6 +52,32 @@ void printBorder()
     attroff(COLOR_PAIR(BORDER_PAIR));
 }
 
+void printPumpkins(field_t* field)
+{
+    int x, y;
+    for (int i = 0; i < PUMPKIN_NUMBER; i++)
+    {
+        x = field->pumpkin[i].x + ZERO_X;
+        y = field->pumpkin[i].y + ZERO_Y;
+        switch (field->pumpkin[i].state)
+        {
+        case (LEVEL_1):
+            mvprintw(y, x, ".");
+            break;
+        case (LEVEL_2):
+            mvprintw(y, x, "o");
+            break;
+        case (IS_RIPE):
+            mvprintw(y, x, "@");
+            break;
+        case (IS_COLLECT):
+            mvprintw(y, x, " ");
+            break;
+        }
+        
+    }
+}
+
 void startView()
 {
     initscr();
