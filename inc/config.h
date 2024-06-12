@@ -1,1 +1,13 @@
 #include <stdio.h>
+#include <ncurses/ncurses.h>
+
+#define FIELD_SIZE_X    50
+#define FIELD_SIZE_Y    20
+#define ZERO_X          5
+#define ZERO_Y          5
+
+#define BACKGROUND_COLOR    COLOR_BLACK
+#define BORDER_COLOR        COLOR_MAGENTA
+#define DRON_COLOR          COLOR_GREEN
+
+

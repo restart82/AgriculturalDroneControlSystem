@@ -1,6 +1,4 @@
-#include <stdio.h>
-// #include <ncurses/ncurses.h>
-
+#include "inc/config.h"
 #include "inc/dron.h"
 #include "inc/view.h"
 
@@ -8,14 +6,15 @@ int main(int argc, char const *argv[])
 {
     dron_t dron = initDron();
 
-    initscr();
-    curs_set(FALSE);
+    startView();
 
+    printBorder();
     printDron(&dron);
-
+    
     refresh();
     getch();
-    endwin();
+
+    endView();
 
     return 0;
 }
