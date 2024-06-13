@@ -48,6 +48,8 @@ void moveBasket(dron_t* dron);
 
 void setCommand(int keyPressed, dron_t* dron);
 
+void autoPilot(dron_t* dron, field_t* field);
+
 void collectPumpkin(dron_t* dron, field_t* field);
 
 #endif

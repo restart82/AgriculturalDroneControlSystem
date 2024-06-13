@@ -79,6 +79,19 @@ void printBorder()
     attroff(COLOR_PAIR(BORDER_PAIR));
 }
 
+void printInfo(session_t* session)
+{
+    switch (session->mode)
+    {
+    case HAND:
+        mvprintw(ZERO_Y - 3, ZERO_X, "HAND MODE");
+        break;
+    case AUTO:
+        mvprintw(ZERO_Y - 3, ZERO_X, "AUTO MODE");
+        break;
+    }
+}
+
 void printPumpkins(field_t* field)
 {
     int x, y;

@@ -4,6 +4,8 @@
 #include "config.h"
 #include "dron.h"
 #include "field.h"
+#include "session.h"
+#include <ncurses/ncurses.h>
 
 typedef enum
 {
@@ -23,6 +25,8 @@ void printDron(dron_t* dron);
 void printBorder();
 
 void printPumpkins(field_t* field);
+
+void printInfo(session_t* session);
 
 void startView();
 

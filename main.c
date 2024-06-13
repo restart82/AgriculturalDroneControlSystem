@@ -6,13 +6,15 @@
 
 int main(int argc, char const *argv[])
 {
+    mode_t currentMode = startMenu();
     dron_t dron = initDron(2, 2, RED);
     field_t field = initPumpkinField();
-    session_t session = initSession();
+    session_t session = initSession(currentMode);
     int keyPressed = 0;
 
     startView();
     printBorder();
+    printInfo(&session);
 
     while(!session.stop)
     {
@@ -25,12 +27,22 @@ int main(int argc, char const *argv[])
 
         if (!session.pause)
         {
-            setCommand(keyPressed, &dron);
+            switch (session.mode)
+            {
+            case HAND:
+                setCommand(keyPressed, &dron);
+                break;
+            case AUTO:
+                autoPilot(&dron, &field);
+                break;
+            }
             collectPumpkin(&dron, &field);
             moveDron(&dron);
             updatePumpkinField(&field);
-            chekCrash(&dron, &session);
+            if (session.mode == HAND)
+                chekCrash(&dron, &session);
         }
+        printInfo(&session);
         clearField();
         printPumpkins(&field);
         printDron(&dron);
@@ -39,6 +51,9 @@ int main(int argc, char const *argv[])
     }
 
     endView();
+    system("cls");
+    printf("Press ENTER to exit...");
+    while (getch() != '\n');
 
     return 0;
 }

@@ -99,6 +99,11 @@ void setCommand(int keyPressed, dron_t* dron)
     }
 }
 
+void autoPilot(dron_t* dron, field_t* field)
+{
+
+}
+
 void collectPumpkin(dron_t* dron, field_t* field)
 {
     for (int i = 0; i < PUMPKIN_NUMBER; i++)
