@@ -5,6 +5,7 @@ field_t initPumpkinField()
     field_t field;
     field.pumpkinNumber = PUMPKIN_NUMBER;
     field.pumpkin = (pumpkin_t*)calloc(PUMPKIN_NUMBER, sizeof(pumpkin_t));
+    field.isReady = false;
     generatePumpkins(&field);
     return field;
 }
@@ -12,6 +13,7 @@ field_t initPumpkinField()
 void updatePumpkinField(field_t* field)
 {
     static int counter = 0;
+    static int delay = 5;
     if (counter < PUMPKIN_GROW_TIME + 1)
     {
         counter++;
@@ -30,15 +32,21 @@ void updatePumpkinField(field_t* field)
         {
             field->pumpkin[i].state = IS_RIPE;
         }
+        field->isReady = true;
     }
 
     if (field->pumpkinNumber == 0)
     {
-        generatePumpkins(field);
-        field->pumpkinNumber = PUMPKIN_NUMBER;
-        counter = 0;
+        delay--;
+        if (delay == 0)
+        {
+            generatePumpkins(field);
+            field->pumpkinNumber = PUMPKIN_NUMBER;
+            field->isReady = false;
+            counter = 0;
+            delay = 5;
+        }
     }
-    
 }
 
 void generatePumpkins(field_t* field)

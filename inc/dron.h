@@ -3,6 +3,7 @@
 
 #include "config.h"
 #include "field.h"
+#include <math.h>
 
 #define START_BASKET_NUMBER 0
 
@@ -51,5 +52,9 @@ void setCommand(int keyPressed, dron_t* dron);
 void autoPilot(dron_t* dron, field_t* field);
 
 void collectPumpkin(dron_t* dron, field_t* field);
+
+int findPumpkin(dron_t* dron, field_t* field);
+
+void goToPumpkin(dron_t* dron, int x, int y);
 
 #endif

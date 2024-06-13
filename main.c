@@ -7,7 +7,7 @@
 int main(int argc, char const *argv[])
 {
     mode_t currentMode = startMenu();
-    dron_t dron = initDron(2, 2, RED);
+    dron_t dron = initDron(2, 2, CYAN);
     field_t field = initPumpkinField();
     session_t session = initSession(currentMode);
     int keyPressed = 0;
@@ -33,7 +33,8 @@ int main(int argc, char const *argv[])
                 setCommand(keyPressed, &dron);
                 break;
             case AUTO:
-                autoPilot(&dron, &field);
+                if (field.isReady)
+                    autoPilot(&dron, &field);
                 break;
             }
             collectPumpkin(&dron, &field);

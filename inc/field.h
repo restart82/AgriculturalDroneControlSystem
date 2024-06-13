@@ -4,8 +4,6 @@
 #include "config.h"
 #include <time.h>
 
-#define PUMPKIN_GROW_TIME 30
-
 typedef enum
 {
     LEVEL_1,
@@ -25,6 +23,7 @@ typedef struct
 {
     int pumpkinNumber;
     pumpkin_t* pumpkin;
+    bool isReady;
 }field_t;
 
 field_t initPumpkinField();

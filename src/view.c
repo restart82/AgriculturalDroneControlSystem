@@ -113,7 +113,8 @@ void printPumpkins(field_t* field)
             break;
         case (IS_RIPE):
             attron(COLOR_PAIR(RIPE_PUMPKIN_PAIR));
-            mvprintw(y, x, "@");
+            // mvprintw(y, x, "@");
+            mvprintw(y, x, "%d", i);
             attroff(COLOR_PAIR(RIPE_PUMPKIN_PAIR));
             break;
         case (IS_COLLECT):
