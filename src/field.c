@@ -12,19 +12,19 @@ field_t initPumpkinField()
 void updatePumpkinField(field_t* field)
 {
     static int counter = 0;
-    if (counter < 15)
+    if (counter < PUMPKIN_GROW_TIME + 1)
     {
         counter++;
     }
     
-    if (counter == 7)
+    if (counter == PUMPKIN_GROW_TIME / 2)
     {
         for (int i = 0; i < PUMPKIN_NUMBER; i++)
         {
             field->pumpkin[i].state = LEVEL_2;
         }
     }
-    else if (counter == 15)
+    else if (counter == PUMPKIN_GROW_TIME)
     {
         for (int i = 0; i < PUMPKIN_NUMBER; i++)
         {

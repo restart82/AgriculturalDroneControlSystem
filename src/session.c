@@ -20,3 +20,15 @@ void chekKey(int key, session_t* session)
         session->pause = !session->pause;
     }
 }
+
+void chekCrash(dron_t* dron, session_t* session)
+{
+    for (int i = 0; i < dron->basketNumber; i++)
+    {
+        if (dron->x == dron->basket[i].x &&
+            dron->y == dron->basket[i].y)
+        {
+            session->stop = true;
+        }
+    }
+}

@@ -2,6 +2,7 @@
 #define SESSION_H_
 
 #include "config.h"
+#include "dron.h"
 
 typedef struct
 {
@@ -13,5 +14,7 @@ typedef struct
 session_t initSession();
 
 void chekKey(int key, session_t* session);
+
+void chekCrash(dron_t* dron, session_t* session);
 
 #endif

@@ -19,7 +19,7 @@ void info(dron_t* dron)
 
 void printDron(dron_t* dron)
 {
-    attron(COLOR_PAIR(DRON_PAIR));
+    attron(COLOR_PAIR(getColorPair(dron)));
 
     mvprintw(dron->y + ZERO_Y, dron->x + ZERO_X, "X");
     for (int i = 0; i < dron->basketNumber; i++)
@@ -27,7 +27,34 @@ void printDron(dron_t* dron)
         mvprintw(dron->basket[i].y + ZERO_Y, dron->basket[i].x + ZERO_X, "u");
     }
 
-    attroff(COLOR_PAIR(DRON_PAIR));
+    attroff(COLOR_PAIR(getColorPair(dron)));
+}
+
+colorPair_t getColorPair(dron_t* dron)
+{
+    colorPair_t pair;
+    switch (dron->color)
+    {
+    case BLUE:
+        pair = BLUE_DRON_PAIR;
+        break;
+    case GREEN:
+        pair = GREEN_DRON_PAIR;
+        break;
+    case RED:
+        pair = RED_DRON_PAIR;
+        break;
+    case YELLOW:
+        pair = YELLOW_DRON_PAIR;
+        break;
+    case CYAN:
+        pair = CYAN_DRON_PAIR;
+        break;
+    case WHITE:
+        pair = WHITE_DRON_PAIR;
+        break;
+    }
+    return pair;
 }
 
 void printBorder()
@@ -62,13 +89,19 @@ void printPumpkins(field_t* field)
         switch (field->pumpkin[i].state)
         {
         case (LEVEL_1):
+            attron(COLOR_PAIR(NOT_RIPE_PUNPKIN_PAIR));
             mvprintw(y, x, ".");
+            attroff(COLOR_PAIR(NOT_RIPE_PUNPKIN_PAIR));
             break;
         case (LEVEL_2):
+            attron(COLOR_PAIR(NOT_RIPE_PUNPKIN_PAIR));
             mvprintw(y, x, "o");
+            attroff(COLOR_PAIR(NOT_RIPE_PUNPKIN_PAIR));
             break;
         case (IS_RIPE):
+            attron(COLOR_PAIR(RIPE_PUMPKIN_PAIR));
             mvprintw(y, x, "@");
+            attroff(COLOR_PAIR(RIPE_PUMPKIN_PAIR));
             break;
         case (IS_COLLECT):
             mvprintw(y, x, " ");
@@ -88,7 +121,14 @@ void startView()
 
     start_color();
     init_pair(BORDER_PAIR, BORDER_COLOR, BACKGROUND_COLOR);
-    init_pair(DRON_PAIR, DRON_COLOR, BACKGROUND_COLOR);
+    init_pair(BLUE_DRON_PAIR, COLOR_BLUE, BACKGROUND_COLOR);
+    init_pair(GREEN_DRON_PAIR, COLOR_GREEN, BACKGROUND_COLOR);
+    init_pair(RED_DRON_PAIR, COLOR_RED, BACKGROUND_COLOR);
+    init_pair(YELLOW_DRON_PAIR, COLOR_YELLOW, BACKGROUND_COLOR);
+    init_pair(CYAN_DRON_PAIR, COLOR_CYAN, BACKGROUND_COLOR);
+    init_pair(WHITE_DRON_PAIR, COLOR_WHITE, BACKGROUND_COLOR);
+    init_pair(RIPE_PUMPKIN_PAIR, COLOR_YELLOW, BACKGROUND_COLOR);
+    init_pair(NOT_RIPE_PUNPKIN_PAIR, COLOR_GREEN, BACKGROUND_COLOR);
 }
 
 void endView()

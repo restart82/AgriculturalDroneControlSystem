@@ -4,6 +4,8 @@
 #include "config.h"
 #include <time.h>
 
+#define PUMPKIN_GROW_TIME 30
+
 typedef enum
 {
     LEVEL_1,

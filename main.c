@@ -6,7 +6,7 @@
 
 int main(int argc, char const *argv[])
 {
-    dron_t dron = initDron(2, 2);
+    dron_t dron = initDron(2, 2, RED);
     field_t field = initPumpkinField();
     session_t session = initSession();
     int keyPressed = 0;
@@ -26,9 +26,11 @@ int main(int argc, char const *argv[])
         if (!session.pause)
         {
             setCommand(keyPressed, &dron);
+            collectPumpkin(&dron, &field);
             moveDron(&dron);
+            updatePumpkinField(&field);
+            chekCrash(&dron, &session);
         }
-        updatePumpkinField(&field);
         clearField();
         printPumpkins(&field);
         printDron(&dron);

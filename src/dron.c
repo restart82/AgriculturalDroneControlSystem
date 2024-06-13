@@ -1,12 +1,12 @@
 #include "../inc/dron.h"
 
-dron_t initDron(int x_0, int y_0)
+dron_t initDron(int x_0, int y_0, dronColor_t _color)
 {
     dron_t dron;
     
     dron.x = ZERO_X + x_0;
     dron.y = ZERO_Y + y_0;
-    dron.basketNumber = 5;
+    dron.basketNumber = START_BASKET_NUMBER;
     dron.basket = (basket_t*)calloc(BASKET_BUFFER, sizeof(basket_t));
     for (int i = 0; i < dron.basketNumber; i++)
     {
@@ -14,6 +14,7 @@ dron_t initDron(int x_0, int y_0)
         dron.basket[i].y = dron.y;
     }
     dron.currentCommand = LEFT;
+    dron.color = _color;
 
     return dron;
 }
@@ -95,5 +96,20 @@ void setCommand(int keyPressed, dron_t* dron)
             dron->currentCommand = LEFT;
         }
         break;
+    }
+}
+
+void collectPumpkin(dron_t* dron, field_t* field)
+{
+    for (int i = 0; i < PUMPKIN_NUMBER; i++)
+    {
+        if (field->pumpkin[i].state == IS_RIPE &&
+            dron->x == field->pumpkin[i].x &&
+            dron->y == field->pumpkin[i].y)
+        {
+            field->pumpkin[i].state = IS_COLLECT;
+            field->pumpkinNumber--;
+            dron->basketNumber++;
+        }
     }
 }
